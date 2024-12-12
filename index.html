@@ -227,42 +227,26 @@
         }
 
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
-
-            .container {
-                padding: 0 1rem;
-            }
-
+            header h1 { font-size: 2rem; }
+            .container { padding: 0 1rem; }
             .fact-card {
                 padding: 2rem;
                 min-height: 200px;
             }
-
-            #fact-text {
-                font-size: 1.1rem;
-            }
+            #fact-text { font-size: 1.1rem; }
         }
 
         @media (max-width: 480px) {
-            header h1 {
-                font-size: 1.8rem;
-            }
-
+            header h1 { font-size: 1.8rem; }
             .fact-card {
                 padding: 1.5rem;
                 min-height: 180px;
             }
-
             .generate-btn {
                 padding: 1rem 2rem;
                 font-size: 1.1rem;
             }
-
-            #fact-text {
-                font-size: 1rem;
-            }
+            #fact-text { font-size: 1rem; }
         }
     </style>
 </head>
@@ -281,8 +265,7 @@
             </div>
             <div class="body">
                 <div class="arm left"></div>
-                <div class="arm right"></div>
-                leg left"></div>
+                <div class<div class="leg left"></div>
                 <div class="leg right"></div>
             </div>
         </div>
@@ -297,7 +280,6 @@
     </main>
 
     <script>
-        // Fun facts data
         const funFacts = {
             "fun_facts": [
                 {
@@ -403,33 +385,26 @@
             ]
         };
 
-        // Track previously shown facts to avoid immediate repetition
         let previousFacts = new Set();
 
-        // Function to generate a random fact
         function generateFact() {
             const facts = funFacts.fun_facts;
             let randomFact;
 
-            // Reset if all facts have been shown
             if (previousFacts.size >= facts.length) {
                 previousFacts.clear();
             }
 
-            // Keep generating until we find a fact that hasn't been shown recently
             do {
                 randomFact = facts[Math.floor(Math.random() * facts.length)];
             } while (previousFacts.has(randomFact.id));
 
-            // Add this fact to the set of shown facts
             previousFacts.add(randomFact.id);
 
-            // Update the DOM
             document.getElementById('category').textContent = randomFact.category.charAt(0).toUpperCase() + 
                                                            randomFact.category.slice(1);
             document.getElementById('fact-text').textContent = randomFact.fact;
 
-            // Add animation effect
             const factCard = document.querySelector('.fact-card');
             factCard.style.opacity = '0';
             setTimeout(() => {
@@ -437,7 +412,6 @@
             }, 100);
         }
 
-        // Generate first fact on page load
         window.onload = generateFact;
     </script>
 </body>
