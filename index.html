@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fun Facts About Me</title>
     <style>
-        /* Modern color scheme and basic reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: all 0.3s ease;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            background: #f0f2f5;
-            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #2c3e50;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -24,73 +24,244 @@
         }
 
         header {
-            background: #2c3e50;
+            background: linear-gradient(to right, #2c3e50, #3498db);
             color: white;
             width: 100%;
-            padding: 1rem;
+            padding: 1.5rem;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .character-container {
+            margin: 2rem 0;
+            cursor: pointer;
+        }
+
+        .character {
+            width: 120px;
+            height: 200px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .character:hover {
+            transform: scale(1.1);
+        }
+
+        .character:active {
+            transform: scale(0.95);
+        }
+
+        .head {
+            width: 60px;
+            height: 60px;
+            background: #FFB6C1;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 30px;
+            animation: bounce 2s infinite;
+        }
+
+        .face {
+            position: relative;
+        }
+
+        .eyes {
+            position: absolute;
+            top: 25px;
+            width: 8px;
+            height: 8px;
+            background: #333;
+            border-radius: 50%;
+            box-shadow: 25px 0 0 #333;
+            left: 15px;
+        }
+
+        .smile {
+            position: absolute;
+            top: 35px;
+            left: 20px;
+            width: 20px;
+            height: 10px;
+            border-bottom: 3px solid #333;
+            border-radius: 50%;
+        }
+
+        .body {
+            width: 70px;
+            height: 100px;
+            background: #87CEEB;
+            position: absolute;
+            top: 60px;
+            left: 25px;
+            border-radius: 20px;
+        }
+
+        .arm {
+            width: 20px;
+            height: 60px;
+            background: #87CEEB;
+            position: absolute;
+            top: 5px;
+            border-radius: 10px;
+        }
+
+        .arm.left {
+            left: -15px;
+            transform-origin: top;
+            animation: wave 3s infinite;
+        }
+
+        .arm.right {
+            right: -15px;
+        }
+
+        .leg {
+            width: 20px;
+            height: 60px;
+            background: #87CEEB;
+            position: absolute;
+            bottom: -50px;
+            border-radius: 10px;
+        }
+
+        .leg.left {
+            left: 10px;
+        }
+
+        .leg.right {
+            right: 10px;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 2rem auto;
-            padding: 0 1rem;
+            padding: 0 1.5rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 100%;
         }
 
         .fact-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             margin: 2rem 0;
             width: 100%;
-            min-height: 200px;
+            min-height: 250px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             text-align: center;
+            transform: translateY(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .fact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
 
         .category-tag {
-            background: #3498db;
+            background: linear-gradient(to right, #3498db, #2980b9);
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
             display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        #fact-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #34495e;
         }
 
         .generate-btn {
-            background: #2ecc71;
+            background: linear-gradient(to right, #2ecc71, #27ae60);
             color: white;
             border: none;
-            padding: 1rem 2rem;
-            border-radius: 25px;
-            font-size: 1.1rem;
+            padding: 1.2rem 2.5rem;
+            border-radius: 30px;
+            font-size: 1.2rem;
             cursor: pointer;
-            transition: transform 0.2s, background 0.2s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
         }
 
         .generate-btn:hover {
-            background: #27ae60;
-            transform: scale(1.05);
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
         }
 
-        /* Responsive Design */
-        @media (max-width: 600px) {
+        .generate-btn:active {
+            transform: scale(0.98);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-20deg); }
+            75% { transform: rotate(20deg); }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .fact-card {
+                padding: 2rem;
+                min-height: 200px;
+            }
+
+            #fact-text {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
             .fact-card {
                 padding: 1.5rem;
-                min-height: 150px;
+                min-height: 180px;
             }
 
             .generate-btn {
-                padding: 0.8rem 1.6rem;
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+            }
+
+            #fact-text {
+                font-size: 1rem;
             }
         }
     </style>
@@ -100,10 +271,27 @@
         <h1>Fun Facts About Me</h1>
     </header>
 
+    <div class="character-container">
+        <div class="character" onclick="generateFact()">
+            <div class="head">
+                <div class="face">
+                    <div class="eyes"></div>
+                    <div class="smile"></div>
+                </div>
+            </div>
+            <div class="body">
+                <div class="arm left"></div>
+                <div class="arm right"></div>
+                leg left"></div>
+                <div class="leg right"></div>
+            </div>
+        </div>
+    </div>
+
     <main class="container">
         <div class="fact-card">
             <span class="category-tag" id="category">Category</span>
-            <p id="fact-text">Click the button below to generate a fun fact!</p>
+            <p id="fact-text">Click the character or button below to generate a fun fact!</p>
         </div>
         <button class="generate-btn" onclick="generateFact()">Generate Fun Fact</button>
     </main>
@@ -117,7 +305,101 @@
                     "category": "adventure",
                     "fact": "Once kayaked with orcas off the coast of Vancouver Island, leading to an impromptu whale song recording session"
                 },
-                // ... Add all other facts from your JSON here
+                {
+                    "id": 2,
+                    "category": "creativity",
+                    "fact": "Created an entire series of paintings using only coffee as the primary medium after running out of watercolors during a camping trip"
+                },
+                {
+                    "id": 3,
+                    "category": "travel",
+                    "fact": "Learned to make authentic pasta from an 85-year-old nonna in a tiny Italian village while backpacking through Europe"
+                },
+                {
+                    "id": 4,
+                    "category": "music",
+                    "fact": "Composed a song using sounds recorded from kitchen utensils that went viral in the local indie music scene"
+                },
+                {
+                    "id": 5,
+                    "category": "food",
+                    "fact": "Successfully completed a 'Century Egg Challenge' in China, eating the 100-year-old preserved egg without flinching"
+                },
+                {
+                    "id": 6,
+                    "category": "outdoor",
+                    "fact": "Found a lesser-known waterfall while hiking off-trail in New Zealand's South Island"
+                },
+                {
+                    "id": 7,
+                    "category": "learning",
+                    "fact": "Taught themselves to speak conversational Japanese through anime and karaoke sessions"
+                },
+                {
+                    "id": 8,
+                    "category": "culture",
+                    "fact": "Participated in Spain's La Tomatina festival and won an impromptu tomato-throwing competition"
+                },
+                {
+                    "id": 9,
+                    "category": "creativity",
+                    "fact": "Built a functional guitar from recycled materials found during beach cleanups"
+                },
+                {
+                    "id": 10,
+                    "category": "adventure",
+                    "fact": "Spent a night in an ice hotel in Sweden and wrote a song about the experience while shivering"
+                },
+                {
+                    "id": 11,
+                    "category": "food",
+                    "fact": "Maintains a collection of hot sauces from 27 different countries, rated by 'tear factor'"
+                },
+                {
+                    "id": 12,
+                    "category": "outdoor",
+                    "fact": "Regularly feeds local wildlife during hiking breaks and has become known as the 'squirrel whisperer'"
+                },
+                {
+                    "id": 13,
+                    "category": "learning",
+                    "fact": "Created a successful cooking blog after learning recipes from street vendors in Thailand"
+                },
+                {
+                    "id": 14,
+                    "category": "creativity",
+                    "fact": "Painted a mural using only natural pigments foraged from different hiking locations"
+                },
+                {
+                    "id": 15,
+                    "category": "culture",
+                    "fact": "Learned traditional Maori haka dance in New Zealand and performed it at their sister's wedding"
+                },
+                {
+                    "id": 16,
+                    "category": "adventure",
+                    "fact": "Accidentally joined a mountain monastery retreat in Nepal while looking for a restroom"
+                },
+                {
+                    "id": 17,
+                    "category": "music",
+                    "fact": "Can play 'Happy Birthday' on seven different instruments, including a didgeridoo"
+                },
+                {
+                    "id": 18,
+                    "category": "learning",
+                    "fact": "Started a neighborhood cooking class after mastering recipes from five different continents"
+                },
+                {
+                    "id": 19,
+                    "category": "outdoor",
+                    "fact": "Managed to kayak every weekend for 47 consecutive weeks while working remotely"
+                },
+                {
+                    "id": 20,
+                    "category": "creativity",
+                    "fact": "Designed a series of travel-inspired jewelry using materials collected from each country visited"
+                }
             ]
         };
 
