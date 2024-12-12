@@ -9,14 +9,11 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: all 0.3s ease;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: #2c3e50;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -32,40 +29,34 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        header h1 {
-            font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
         .character-container {
             margin: 2rem 0;
+            position: relative;
+            height: 400px;
             cursor: pointer;
         }
 
         .character {
-            width: 120px;
-            height: 200px;
+            width: 200px;
+            height: 400px;
             position: relative;
             transition: transform 0.3s ease;
         }
 
         .character:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
-        .character:active {
-            transform: scale(0.95);
-        }
-
+        /* Head and Face */
         .head {
-            width: 60px;
-            height: 60px;
-            background: #FFB6C1;
-            border-radius: 50%;
+            width: 80px;
+            height: 100px;
+            background: #FFE0BD;
+            border-radius: 40px;
             position: absolute;
             top: 0;
-            left: 30px;
-            animation: bounce 2s infinite;
+            left: 60px;
+            animation: headBob 2s infinite;
         }
 
         .face {
@@ -74,150 +65,145 @@
 
         .eyes {
             position: absolute;
-            top: 25px;
-            width: 8px;
-            height: 8px;
+            top: 40px;
+            width: 10px;
+            height: 10px;
             background: #333;
             border-radius: 50%;
-            box-shadow: 25px 0 0 #333;
+            box-shadow: 35px 0 0 #333;
             left: 15px;
         }
 
         .smile {
             position: absolute;
-            top: 35px;
-            left: 20px;
-            width: 20px;
-            height: 10px;
+            top: 60px;
+            left: 25px;
+            width: 30px;
+            height: 15px;
             border-bottom: 3px solid #333;
             border-radius: 50%;
         }
 
-        .body {
-            width: 70px;
-            height: 100px;
-            background: #87CEEB;
+        /* Body Parts */
+        .neck {
+            width: 20px;
+            height: 20px;
+            background: #FFE0BD;
             position: absolute;
-            top: 60px;
-            left: 25px;
+            top: 95px;
+            left: 90px;
+        }
+
+        .torso {
+            width: 100px;
+            height: 150px;
+            background: #3498db;
+            position: absolute;
+            top: 115px;
+            left: 50px;
             border-radius: 20px;
         }
 
         .arm {
-            width: 20px;
-            height: 60px;
-            background: #87CEEB;
+            width: 25px;
+            height: 100px;
+            background: #3498db;
             position: absolute;
-            top: 5px;
+            top: 120px;
             border-radius: 10px;
         }
 
         .arm.left {
-            left: -15px;
+            left: 20px;
             transform-origin: top;
             animation: wave 3s infinite;
         }
 
         .arm.right {
-            right: -15px;
+            right: 20px;
+        }
+
+        .hand {
+            width: 20px;
+            height: 20px;
+            background: #FFE0BD;
+            position: absolute;
+            bottom: -15px;
+            left: 2.5px;
+            border-radius: 50%;
         }
 
         .leg {
-            width: 20px;
-            height: 60px;
-            background: #87CEEB;
+            width: 30px;
+            height: 120px;
+            background: #2c3e50;
             position: absolute;
-            bottom: -50px;
+            top: 260px;
             border-radius: 10px;
         }
 
         .leg.left {
-            left: 10px;
+            left: 60px;
         }
 
         .leg.right {
-            right: 10px;
+            right: 60px;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
+        .foot {
+            width: 35px;
+            height: 20px;
+            background: #333;
+            position: absolute;
+            bottom: -15px;
+            border-radius: 10px;
         }
 
-        .fact-card {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin: 2rem 0;
-            width: 100%;
-            min-height: 250px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: center;
-            transform: translateY(0);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .fact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .category-tag {
-            background: linear-gradient(to right, #3498db, #2980b9);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 25px;
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-        }
-
-        #fact-text {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            color: #34495e;
-        }
-
-        .generate-btn {
-            background: linear-gradient(to right, #2ecc71, #27ae60);
-            color: white;
-            border: none;
-            padding: 1.2rem 2.5rem;
+        /* Thinking Cloud */
+        .thought-bubble {
+            position: absolute;
+            top: -80px;
+            right: -200px;
+            background: white;
+            padding: 20px;
             border-radius: 30px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: bold;
+            max-width: 250px;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.5s ease;
         }
 
-        .generate-btn:hover {
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+        .thought-bubble.active {
+            opacity: 1;
+            transform: scale(1);
         }
 
-        .generate-btn:active {
-            transform: scale(0.98);
+        .thought-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 20px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
         }
 
-        @keyframes bounce {
+        .thought-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -35px;
+            left: 5px;
+            width: 15px;
+            height: 15px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        /* Animations */
+        @keyframes headBob {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-5px); }
         }
 
         @keyframes wave {
@@ -227,26 +213,9 @@
         }
 
         @media (max-width: 768px) {
-            header h1 { font-size: 2rem; }
-            .container { padding: 0 1rem; }
-            .fact-card {
-                padding: 2rem;
-                min-height: 200px;
+            .character-container {
+                transform: scale(0.8);
             }
-            #fact-text { font-size: 1.1rem; }
-        }
-
-        @media (max-width: 480px) {
-            header h1 { font-size: 1.8rem; }
-            .fact-card {
-                padding: 1.5rem;
-                min-height: 180px;
-            }
-            .generate-btn {
-                padding: 1rem 2rem;
-                font-size: 1.1rem;
-            }
-            #fact-text { font-size: 1rem; }
         }
     </style>
 </head>
@@ -256,6 +225,10 @@
     </header>
 
     <div class="character-container">
+        <div class="thought-bubble" id="thought-bubble">
+            <span class="category-tag" id="category">Category</span>
+            <p id="fact-text">Click me to learn something fun!</p>
+        </div>
         <div class="character" onclick="generateFact()">
             <div class="head">
                 <div class="face">
@@ -263,21 +236,14 @@
                     <div class="smile"></div>
                 </div>
             </div>
-            <div class="body">
-                <div class="arm left"></div>
-                <div class<div class="leg left"></div>
-                <div class="leg right"></div>
-            </div>
+            <div class="neck"></div>
+            <div class="torso"></div>
+            <div class="arm left"><div class="hand"></div></div>
+            <div class="arm right"><div class="hand"></div></div>
+            <div class="leg left"><div class="foot"></div></div>
+            <div class="leg right"><div class="foot"></div></div>
         </div>
     </div>
-
-    <main class="container">
-        <div class="fact-card">
-            <span class="category-tag" id="category">Category</span>
-            <p id="fact-text">Click the character or button below to generate a fun fact!</p>
-        </div>
-        <button class="generate-btn" onclick="generateFact()">Generate Fun Fact</button>
-    </main>
 
     <script>
         const funFacts = {
@@ -310,7 +276,7 @@
                 {
                     "id": 6,
                     "category": "outdoor",
-                    "fact": "Found a lesser-known waterfall while hiking off-trail in New Zealand's South Island"
+                    "fact": "Found a lessertrail in New Zealand's South Island"
                 },
                 {
                     "id": 7,
@@ -401,15 +367,16 @@
 
             previousFacts.add(randomFact.id);
 
-            document.getElementById('category').textContent = randomFact.category.charAt(0).toUpperCase() + 
-                                                           randomFact.category.slice(1);
-            document.getElementById('fact-text').textContent = randomFact.fact;
+            const thoughtBubble = document.getElementById('thought-bubble');
+            thoughtBubble.classList.remove('active');
 
-            const factCard = document.querySelector('.fact-card');
-            factCard.style.opacity = '0';
             setTimeout(() => {
-                factCard.style.opacity = '1';
-            }, 100);
+                document.getElementById('category').textContent = 
+                    randomFact.category.charAt(0).toUpperCase() + 
+                    randomFact.category.slice(1);
+                document.getElementById('fact-text').textContent = randomFact.fact;
+                thoughtBubble.classList.add('active');
+            }, 500);
         }
 
         window.onload = generateFact;
